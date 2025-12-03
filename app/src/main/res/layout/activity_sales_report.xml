@@ -1,0 +1,607 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground">
+
+    <!-- Header with Back, Title, and Printer Icon -->
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:gravity="center_vertical"
+        android:background="@color/colorSurface"
+        android:elevation="2dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_back"
+            android:contentDescription="Back"
+            android:tint="@color/colorOnSurface"
+            android:padding="12dp" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Sales Report"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorOnSurface"
+            android:gravity="center"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp" />
+
+        <ImageButton
+            android:id="@+id/btnPrint"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_email"
+            android:contentDescription="Email Report"
+            android:tint="@color/colorPrimary"
+            android:padding="12dp" />
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/headerLayout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Sales Revenue Overview Card -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardChart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                app:cardBackgroundColor="@color/colorSurface">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <!-- Chart Header with Title and Icons -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="20dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Sales Revenue Overview"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorOnSurface" />
+
+                        <ImageButton
+                            android:id="@+id/btnCalendar"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:src="@drawable/ic_search"
+                            android:contentDescription="Select Date"
+                            android:tint="@color/colorPrimary"
+                            android:padding="12dp"
+                            android:layout_marginEnd="8dp" />
+
+                        <ImageButton
+                            android:id="@+id/btnFilter"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:src="@drawable/ic_sort"
+                            android:contentDescription="Filter"
+                            android:tint="@color/colorPrimary"
+                            android:padding="12dp" />
+                    </LinearLayout>
+
+                    <!-- View By Button -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnViewBy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="View by: Day"
+                        android:textSize="14sp"
+                        android:layout_marginBottom="20dp"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        app:strokeColor="@color/colorPrimary"
+                        app:strokeWidth="1dp"
+                        app:backgroundTint="@android:color/transparent"
+                        android:textColor="@color/colorPrimary" />
+
+                    <!-- Chart Legend -->
+                    <LinearLayout
+                        android:id="@+id/legendLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:layout_marginBottom="16dp">
+
+                        <!-- Legend items will be added dynamically -->
+                    </LinearLayout>
+
+                    <!-- Bar Chart Container -->
+                    <com.loretacafe.pos.ui.chart.SalesBarChartView
+                        android:id="@+id/barChartView"
+                        android:layout_width="match_parent"
+                        android:layout_height="240dp"
+                        android:background="@android:color/transparent"
+                        android:layout_marginTop="8dp" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Daily Sales Details Card -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                app:cardBackgroundColor="@color/colorSurface">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <!-- Date Header -->
+                    <TextView
+                        android:id="@+id/tvSelectedDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="13 November 2025"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorOnSurface"
+                        android:layout_marginBottom="20dp" />
+
+                    <!-- Divider Line -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorOutline"
+                        android:layout_marginBottom="16dp" />
+
+                    <!-- Table Header Row -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:orientation="horizontal"
+                        android:background="@color/colorPrimary"
+                        android:layout_marginBottom="8dp"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:gravity="center_vertical">
+
+                        <!-- Category Header -->
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Category"
+                            android:textColor="@color/colorOnPrimary"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <!-- Data Header -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Data"
+                            android:textColor="@color/colorOnPrimary"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:gravity="end" />
+                    </LinearLayout>
+
+                    <!-- Total Sales Row -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:orientation="horizontal"
+                        android:background="@color/colorSurface"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="4dp">
+
+                        <!-- Category Column -->
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Total Sales"
+                            android:textColor="@color/colorOnSurface"
+                            android:textSize="14sp" />
+
+                        <!-- Data Column -->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:id="@+id/tvTotalSales"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="₱ 123.00"
+                                android:textColor="@color/colorOnSurface"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                android:layout_marginEnd="8dp" />
+
+                            <ImageView
+                                android:id="@+id/ivInfoTotalSales"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/ic_info"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:contentDescription="Info"
+                                android:tint="@color/colorPrimary"
+                                android:padding="4dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!-- Estimated Profit Row -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:orientation="horizontal"
+                        android:background="@color/colorSurfaceVariant"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="4dp">
+
+                        <!-- Category Column -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/estimated_profit"
+                                android:scaleType="centerInside"
+                                android:layout_marginEnd="8dp"
+                                android:contentDescription="Estimated Profit Icon"
+                                android:adjustViewBounds="true" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Estimated Profit"
+                                android:textColor="@color/colorOnSurface"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <!-- Data Column -->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:id="@+id/tvEstimatedProfit"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="₱ 123.00"
+                                android:textColor="@color/colorOnSurface"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                android:layout_marginEnd="8dp" />
+
+                            <ImageView
+                                android:id="@+id/ivInfoEstimatedProfit"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/ic_info"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:contentDescription="Info"
+                                android:tint="@color/colorPrimary"
+                                android:padding="4dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!-- Total Orders Row -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:orientation="horizontal"
+                        android:background="@color/colorSurface"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="4dp">
+
+                        <!-- Category Column -->
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Total Orders"
+                            android:textColor="@color/colorOnSurface"
+                            android:textSize="14sp" />
+
+                        <!-- Data Column -->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:id="@+id/tvTotalOrders"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="1"
+                                android:textColor="@color/colorOnSurface"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                android:layout_marginEnd="8dp" />
+
+                            <ImageView
+                                android:id="@+id/ivInfoTotalOrders"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/ic_info"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:contentDescription="Info"
+                                android:tint="@color/colorPrimary"
+                                android:padding="4dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!-- Cash Payments Row -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:orientation="horizontal"
+                        android:background="@color/colorSurfaceVariant"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="4dp">
+
+                        <!-- Category Column -->
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Cash Payments"
+                            android:textColor="@color/colorOnSurface"
+                            android:textSize="14sp" />
+
+                        <!-- Data Column -->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:id="@+id/tvCashPayments"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="₱ 123.00"
+                                android:textColor="@color/colorOnSurface"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                android:layout_marginEnd="8dp" />
+
+                            <ImageView
+                                android:id="@+id/ivInfoCashPayments"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/ic_info"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:contentDescription="Info"
+                                android:tint="@color/colorPrimary"
+                                android:padding="4dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!-- Card Payments Row -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:orientation="horizontal"
+                        android:background="@color/colorSurface"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="4dp">
+
+                        <!-- Category Column -->
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Card Payments"
+                            android:textColor="@color/colorOnSurface"
+                            android:textSize="14sp" />
+
+                        <!-- Data Column -->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:id="@+id/tvCardPayments"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="₱ 123.00"
+                                android:textColor="@color/colorOnSurface"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                android:layout_marginEnd="8dp" />
+
+                            <ImageView
+                                android:id="@+id/ivInfoCardPayments"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/ic_info"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:contentDescription="Info"
+                                android:tint="@color/colorPrimary"
+                                android:padding="4dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!-- Items Running Low Row -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:orientation="horizontal"
+                        android:background="@color/colorSurfaceVariant"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="16dp">
+
+                        <!-- Category Column -->
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Items Running Low"
+                            android:textColor="@color/colorOnSurface"
+                            android:textSize="14sp" />
+
+                        <!-- Data Column -->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:id="@+id/tvItemsRunningLow"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="1"
+                                android:textColor="@color/colorOnSurface"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                android:layout_marginEnd="8dp" />
+
+                            <ImageView
+                                android:id="@+id/ivInfoItemsRunningLow"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/ic_info"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:contentDescription="Info"
+                                android:tint="@color/colorPrimary"
+                                android:padding="4dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!-- Disclaimer -->
+                    <TextView
+                        android:id="@+id/tvDisclaimer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="All figures reflect recorded transactions for the selected date range. Data updates automatically based on sales records."
+                        android:textSize="12sp"
+                        android:textColor="@color/colorOnSurfaceVariant"
+                        android:textStyle="italic"
+                        android:lineSpacingExtra="4dp"
+                        android:layout_marginTop="8dp"
+                        android:gravity="start"
+                        android:paddingStart="4dp"
+                        android:paddingEnd="4dp" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Footer with Logo and Copyright -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="24dp"
+                android:layout_marginTop="8dp">
+
+                <ImageView
+                    android:layout_width="104dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/dashboard_icon"
+                    android:scaleType="fitCenter"
+                    android:contentDescription="Loreta's Café Logo"
+                    android:layout_marginBottom="12dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Terms and Condition"
+                        android:textSize="12sp"
+                        android:textColor="@color/colorOnSurfaceVariant" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" | © 2025 All Rights Reserved"
+                        android:textSize="12sp"
+                        android:textColor="@color/colorOnSurfaceVariant" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

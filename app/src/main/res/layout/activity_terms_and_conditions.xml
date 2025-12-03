@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Terms and Conditions of Use"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#1F1F1F"
+        android:gravity="center"
+        android:layout_marginBottom="16dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <TextView
+            android:id="@+id/tvTermsContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="#1F1F1F"
+            android:lineSpacingExtra="4dp"
+            android:padding="8dp" />
+
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnAgree"
+            android:layout_width="217dp"
+            android:layout_height="40dp"
+            android:text="Agree"
+            android:textColor="#FAFAFA"
+            android:background="@drawable/bg_button_primary"
+            android:backgroundTint="@null"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:stateListAnimator="@null" />
+        
+
+    </LinearLayout>
+
+</LinearLayout>
+

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="cr100">
+        <item name="cornerSize">100dp</item>
+    </style>
+
+    <!-- Bottom Navigation Style -->
+    <style name="BottomNavigationStyle" parent="Widget.Material3.BottomNavigationView">
+        <item name="android:background">@color/nav_background</item>
+        <item name="android:elevation">8dp</item>
+        <item name="itemIconTint">@drawable/bottom_nav_color_selector</item>
+        <item name="itemTextColor">@drawable/bottom_nav_color_selector</item>
+        <item name="itemIconSize">@dimen/bottom_nav_icon_size</item>
+        <item name="android:minHeight">@dimen/bottom_nav_height</item>
+        <item name="itemPaddingTop">@dimen/bottom_nav_item_padding</item>
+        <item name="itemPaddingBottom">@dimen/bottom_nav_item_padding</item>
+        <item name="labelVisibilityMode">labeled</item>
+    </style>
+
+    <!-- Navigation Drawer Style -->
+    <style name="NavigationViewStyle" parent="Widget.Material3.NavigationView">
+        <item name="android:background">@color/nav_drawer_background</item>
+        <item name="itemIconTint">@color/nav_drawer_item_unselected</item>
+        <item name="itemTextColor">@color/nav_drawer_item_unselected</item>
+    </style>
+
+    <!-- Navigation Item Shape -->
+    <style name="NavigationItemShape">
+        <item name="cornerSize">8dp</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
+
+    <!-- Navigation Item Ripple -->
+    <style name="NavigationItemRipple">
+        <item name="android:color">@color/nav_ripple</item>
+    </style>
+</resources>
+
+

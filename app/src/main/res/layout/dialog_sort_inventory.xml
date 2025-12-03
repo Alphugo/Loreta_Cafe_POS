@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="215dp"
+    android:layout_height="186dp"
+    android:orientation="vertical"
+    android:background="@drawable/bg_sort_dialog"
+    android:padding="16dp">
+
+    <!-- Header with Title and Close Button -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="24dp">
+
+        <TextView
+            android:id="@+id/tvSortTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Sort by"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#000000" />
+
+        <ImageButton
+            android:id="@+id/btnCloseSort"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_close"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Close" />
+    </LinearLayout>
+
+    <!-- Sort Options -->
+    <TextView
+        android:id="@+id/tvSortLowStock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Low Stock Priority"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:padding="16dp"
+        android:minHeight="48dp"
+        android:gravity="center_vertical"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true" />
+
+    <TextView
+        android:id="@+id/tvSortNewest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Newest Added"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:padding="16dp"
+        android:minHeight="48dp"
+        android:gravity="center_vertical"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_marginTop="8dp" />
+
+</LinearLayout>
+

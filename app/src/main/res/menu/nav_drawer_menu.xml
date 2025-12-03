@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_dashboard"
+        android:icon="@drawable/ic_home"
+        android:title="Dashboard" />
+
+    <item
+        android:id="@+id/nav_recent_transactions"
+        android:icon="@drawable/ic_history"
+        android:title="Recent Transaction" />
+
+    <item
+        android:id="@+id/nav_create_order"
+        android:icon="@drawable/ic_add"
+        android:title="Create Order" />
+
+    <item
+        android:id="@+id/nav_shift_management"
+        android:icon="@drawable/ic_clock"
+        android:title="My Shifts" />
+
+    <item
+        android:id="@+id/nav_menu_list"
+        android:title="Menu List">
+        <menu>
+            <item
+                android:id="@+id/nav_add_item"
+                android:title="    Add Item" />
+            <item
+                android:id="@+id/nav_add_category"
+                android:title="    Add Category" />
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/nav_inventory"
+        android:icon="@drawable/ic_inventory"
+        android:title="Inventory">
+        <menu>
+            <item
+                android:id="@+id/nav_sales_report"
+                android:title="    Sales Report" />
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/nav_settings"
+        android:icon="@drawable/ic_settings"
+        android:title="Settings">
+        <menu>
+            <item
+                android:id="@+id/nav_user_management"
+                android:title="    User Management" />
+            <item
+                android:id="@+id/nav_printer_settings"
+                android:title="    Printer Settings" />
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/nav_sign_out"
+        android:title="Sign Out" />
+
+</menu>

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:id="@+id/rhlul846j25"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="#FAFAFA">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <!-- Loreta's Café logo at the top of the login screen -->
+            <ImageView
+                android:id="@+id/r972hsut043v"
+                android:layout_width="wrap_content"
+                android:layout_height="242dp"
+                android:layout_marginTop="48dp"
+                android:layout_marginBottom="48dp"
+                android:src="@drawable/login_page_logo"
+                android:scaleType="fitCenter"
+                android:contentDescription="@string/logo" />
+
+            <LinearLayout
+                android:id="@+id/r9puio37j0ws"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginHorizontal="36dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/r3824v0r7389"
+                    android:textColor="#1F1F1F"
+                    android:textSize="14sp"
+                    android:layout_marginBottom="6dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="Username" />
+
+                <EditText
+                    android:inputType="textEmailAddress"
+                    android:id="@+id/rwg62abf8due"
+                    android:textColor="#828282"
+                    android:textSize="14sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/sdfdfdfsw1cr100bfafafa"
+                    android:paddingVertical="18dp"
+                    android:paddingHorizontal="16dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/r0u3a2tzqqkq"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginHorizontal="36dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/r4is730a7lov"
+                    android:textColor="#1F1F1F"
+                    android:textSize="14sp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="Password" />
+
+                <LinearLayout
+                    android:id="@+id/r557lj1wl59"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/sdfdfdfsw1cr100bfafafa"
+                    android:paddingRight="16dp"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:inputType="textPassword"
+                        android:background="@null"
+                        android:id="@+id/rid5obqf6zfb"
+                        android:textColor="#828282"
+                        android:textSize="14sp"
+                        android:layout_marginEnd="4dp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingVertical="18dp"
+                        android:paddingLeft="16dp" />
+
+                    <ImageView
+                        android:id="@+id/ivPasswordToggle"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_eye_closed"
+                        android:padding="4dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:contentDescription="Toggle password visibility" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/rqllgk2iluge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:layout_marginBottom="54dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/r1lc2jyaqvt3"
+                    android:textColor="#1F1F1F"
+                    android:textSize="12sp"
+                    android:layout_marginEnd="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="Forgot Password?"
+                    android:clickable="true"
+                    android:focusable="true" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginBottom="53dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/ra7xx5mlfk4e"
+                    android:layout_width="217dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="@drawable/bg_button_primary"
+                    android:paddingVertical="18dp"
+                    android:paddingHorizontal="32dp">
+
+                    <TextView
+                        android:id="@+id/r5om6qriouoj"
+                        android:textColor="#FAFAFA"
+                        android:textSize="14sp"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="Continue" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/rryys7i44v1q"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="29dp"
+                android:layout_marginStart="59dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <CheckBox
+                    android:id="@+id/ra818mrpnvul"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="7dp"
+                    android:buttonTint="#40362B"
+                    android:visibility="visible"
+                    android:minHeight="24dp"
+                    android:minWidth="24dp"
+                    android:contentDescription="Terms checkbox" />
+
+                <TextView
+                    android:id="@+id/r7cm1t5pqm1q"
+                    android:textColor="#828282"
+                    android:textSize="12sp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="By clicking continue, you agree to our\nTerms of Service and Privacy Policy"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:textColorLink="#40362B" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
+
+

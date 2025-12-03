@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="64dp"
+    android:height="64dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+    
+    <!-- Circle Background -->
+    <path
+        android:fillColor="#E8F5E9"
+        android:pathData="M32,32m-28,0a28,28 0,1 1,56 0a28,28 0,1 1,-56 0"/>
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M32,32m-26,0a26,26 0,1 1,52 0a26,26 0,1 1,-52 0"/>
+    
+    <!-- Pie Chart - Filled portion (75%) -->
+    <path
+        android:fillColor="#2E7D32"
+        android:pathData="M32,32 L32,6 A26,26 0,0,1 56,32 Z"/>
+    <path
+        android:fillColor="#2E7D32"
+        android:pathData="M32,32 L56,32 A26,26 0,0,1 48,52 Z"/>
+    
+    <!-- Coffee Cup Center -->
+    <path
+        android:fillColor="#5D4E3C"
+        android:pathData="M28,26 L36,26 L36,38 L34,40 L30,40 L28,38 Z"/>
+    
+    <!-- Latte Art - Leaf/Fern Pattern -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:strokeWidth="1"
+        android:strokeColor="#FFFFFF"
+        android:pathData="M32,28 Q30,30 32,32 Q34,30 32,28 M32,30 Q31,32 32,34 Q33,32 32,30 M32,32 Q30.5,33.5 32,35 Q33.5,33.5 32,32"/>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M30,30 Q29,31 30,32 M34,30 Q35,31 34,32"/>
+</vector>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

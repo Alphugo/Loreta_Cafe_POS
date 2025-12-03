@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+
+    <!-- Straw -->
+    <path
+        android:fillColor="#D32F2F"
+        android:pathData="M24,6h2v10h-2z" />
+    <path
+        android:fillColor="#D32F2F"
+        android:pathData="M24,6l6,2v2l-6,-2z" />
+
+    <!-- Cup rim -->
+    <path
+        android:fillColor="#B0BEC5"
+        android:pathData="M10,14h28v3h-28z" />
+
+    <!-- Cup body (fatter version) -->
+    <path
+        android:fillColor="#E0E0E0"
+        android:pathData="M12,17h24l-4,23h-16z" />
+
+    <!-- Drink (soda) inside -->
+    <path
+        android:fillColor="#3E2723"
+        android:pathData="M14,26h20l-2.5,12h-15z" />
+
+    <!-- Ice cube details -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M18,28h3v3h-3z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M24,30h3v3h-3z" />
+
+    <!-- Cup bottom shadow -->
+    <path
+        android:fillColor="#9E9E9E"
+        android:pathData="M12,40h24v2h-24z" />
+</vector>

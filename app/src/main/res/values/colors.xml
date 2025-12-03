@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Loreta's Café Core Palette -->
+    <color name="deep_brown">#603813</color>
+    <color name="muted_beige">#C4AE7B</color>
+    <color name="warm_tan">#E0B07D</color>
+    <color name="dark_taupe">#3E3328</color>
+    <color name="charcoal_brown">#201913</color>
+    <color name="cream_background">#F7F1E5</color>
+
+    <color name="white">#FFFFFFFF</color>
+    <color name="black">#FF000000</color>
+    <color name="brown">@color/deep_brown</color>
+
+    <!-- Material 3 Semantic Colors -->
+    <color name="colorPrimary">@color/deep_brown</color>
+    <color name="colorOnPrimary">@color/white</color>
+    <color name="colorPrimaryContainer">@color/dark_taupe</color>
+    <color name="colorOnPrimaryContainer">@color/cream_background</color>
+
+    <color name="colorSecondary">@color/warm_tan</color>
+    <color name="colorOnSecondary">@color/charcoal_brown</color>
+    <color name="colorSecondaryContainer">#F7E0C4</color>
+    <color name="colorOnSecondaryContainer">@color/dark_taupe</color>
+
+    <color name="colorTertiary">@color/muted_beige</color>
+    <color name="colorOnTertiary">@color/charcoal_brown</color>
+
+    <color name="colorBackground">@color/cream_background</color>
+    <color name="colorOnBackground">@color/charcoal_brown</color>
+    <color name="colorSurface">@color/white</color>
+    <color name="colorOnSurface">@color/dark_taupe</color>
+    <color name="colorSurfaceVariant">#E5D9C8</color>
+    <color name="colorOnSurfaceVariant">@color/dark_taupe</color>
+    <color name="colorOutline">#D6C7B4</color>
+
+    <!-- Status Colors -->
+    <color name="success_green">#4CAF50</color>
+    <color name="error_red">#F44336</color>
+    <color name="warning_orange">#FF9800</color>
+
+    <!-- Navigation Colors -->
+    <color name="nav_unselected">#8B7355</color>
+    <color name="nav_selected">@color/deep_brown</color>
+    <color name="nav_background">@color/white</color>
+    <color name="nav_ripple">@color/warm_tan</color>
+
+    <!-- Navigation Drawer -->
+    <color name="nav_drawer_background">@color/white</color>
+    <color name="nav_drawer_item_selected">@color/warm_tan</color>
+    <color name="nav_drawer_item_unselected">@color/dark_taupe</color>
+    <color name="nav_drawer_divider">#E8D5C4</color>
+
+</resources>

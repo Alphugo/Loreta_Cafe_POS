@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Landscape orientation dimensions -->
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_medium">16dp</dimen>
+    <dimen name="margin_large">20dp</dimen>
+    <dimen name="margin_xlarge">24dp</dimen>
+    
+    <!-- Logo sizes for landscape -->
+    <dimen name="logo_width">160dp</dimen>
+    <dimen name="logo_height">160dp</dimen>
+    
+    <!-- Dashboard card heights for landscape -->
+    <dimen name="dashboard_chart_height">140dp</dimen>
+    <dimen name="dashboard_stat_card_height">80dp</dimen>
+</resources>
+

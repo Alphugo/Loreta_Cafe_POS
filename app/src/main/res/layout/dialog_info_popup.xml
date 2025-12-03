@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="159dp"
+    android:layout_height="76dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="8dp"
+    app:cardBackgroundColor="#FFFFFF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="12dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/tvInfoTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Total Sales"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="#1A1A1A"
+            android:layout_marginBottom="4dp" />
+
+        <TextView
+            android:id="@+id/tvInfoDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Total Amount earned for the selected date."
+            android:textSize="12sp"
+            android:textColor="#666666"
+            android:lineSpacingExtra="2dp" />
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

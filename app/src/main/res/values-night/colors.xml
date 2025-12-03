@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Material 3 Semantic Colors (Dark) -->
+    <color name="colorPrimary">#E0B07D</color>
+    <color name="colorOnPrimary">#201913</color>
+    <color name="colorPrimaryContainer">#3E3328</color>
+    <color name="colorOnPrimaryContainer">#F7F1E5</color>
+
+    <color name="colorSecondary">#C4AE7B</color>
+    <color name="colorOnSecondary">#201913</color>
+    <color name="colorSecondaryContainer">#4A3F33</color>
+    <color name="colorOnSecondaryContainer">#F7F1E5</color>
+
+    <color name="colorTertiary">#AA9260</color>
+    <color name="colorOnTertiary">#201913</color>
+
+    <color name="colorBackground">#201913</color>
+    <color name="colorOnBackground">#F7F1E5</color>
+    <color name="colorSurface">#3E3328</color>
+    <color name="colorOnSurface">#F7F1E5</color>
+    <color name="colorSurfaceVariant">#4A3F33</color>
+    <color name="colorOnSurfaceVariant">#E5D9C8</color>
+    <color name="colorOutline">#8E7C69</color>
+</resources>
+

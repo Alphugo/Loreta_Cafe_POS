@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="end">
+
+    <!-- Main Content -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF">
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/margin_medium"
+                android:paddingBottom="@dimen/margin_large">
+
+                <!-- Header -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingStart="@dimen/padding_medium"
+                    android:paddingEnd="@dimen/padding_medium"
+                    android:paddingTop="@dimen/padding_medium"
+                    android:paddingBottom="@dimen/padding_small"
+                    android:gravity="center_vertical">
+
+                    <!-- Logo -->
+                    <ImageView
+                        android:id="@+id/ivLogo"
+                        android:layout_width="0dp"
+                        android:layout_height="56dp"
+                        android:layout_weight="1"
+                        android:maxHeight="64dp"
+                        android:src="@drawable/dashboard_icon"
+                        android:scaleType="fitStart"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="Loreta's Café Logo" />
+
+                    <!-- Menu Button -->
+                    <ImageButton
+                        android:id="@+id/btnMenu"
+                        android:layout_width="@dimen/icon_size_medium"
+                        android:layout_height="@dimen/icon_size_medium"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_menu"
+                        app:tint="#5D4E3C"
+                        android:contentDescription="Menu" />
+                </LinearLayout>
+
+                <!-- Dashboard Title -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_medium"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:text="Dashboard"
+                    android:textColor="#1A1A1A"
+                    android:textSize="@dimen/text_size_title"
+                    android:textStyle="bold" />
+
+                <!-- Top Metrics Row: Gross Daily Sales, Total Orders, Monthly Revenue (Scrollable) -->
+                <!-- Top metrics group -->
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:scrollbars="none"
+                    android:fadeScrollbars="false"
+                    android:fillViewport="false">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingStart="@dimen/margin_medium"
+                        android:paddingEnd="@dimen/margin_medium">
+
+                    <!-- Gross Daily Sales Card -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardGrossDailySales"
+                        android:layout_width="303dp"
+                        android:layout_height="142dp"
+                        android:layout_marginEnd="12dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackground"
+                        app:cardBackgroundColor="#8B6F47"
+                        app:cardCornerRadius="25dp"
+                        app:cardElevation="4dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="16dp"
+                            android:background="@drawable/bg_gradient_brown">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Gross Daily Sales"
+                                android:textColor="#FFFFFF"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentStart="true" />
+
+                            <TextView
+                                android:id="@+id/tvGrossDailySales"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="₱ 0.00"
+                                android:textColor="#FFFFFF"
+                                android:textSize="25sp"
+                                android:textStyle="bold"
+                                android:layout_alignParentBottom="true"
+                                android:layout_alignParentStart="true" />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- Total Orders Card -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardTotalOrders"
+                        android:layout_width="303dp"
+                        android:layout_height="142dp"
+                        android:layout_marginEnd="12dp"
+                        app:cardBackgroundColor="#5D4E3C"
+                        app:cardCornerRadius="25dp"
+                        app:cardElevation="4dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="16dp"
+                            android:background="@drawable/dashboard_card_border">
+
+                            <!-- Title -->
+                            <TextView
+                                android:id="@+id/tvTotalOrdersTitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Total Orders"
+                                android:textColor="#FFFFFF"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentStart="true" />
+
+                            <!-- Subtitle -->
+                            <TextView
+                                android:id="@+id/tvTotalOrdersSubtitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Orders completed today"
+                                android:textColor="#FFFFFF"
+                                android:textSize="10sp"
+                                android:layout_below="@+id/tvTotalOrdersTitle"
+                                android:layout_alignParentStart="true"
+                                android:layout_marginTop="4dp" />
+
+                            <!-- Order Count -->
+                            <TextView
+                                android:id="@+id/tvTotalOrders"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0"
+                                android:textColor="#FFFFFF"
+                                android:textSize="25sp"
+                                android:textStyle="bold"
+                                android:layout_alignParentBottom="true"
+                                android:layout_alignParentStart="true" />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- Monthly Revenue Card -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardMonthlyRevenue"
+                        android:layout_width="303dp"
+                        android:layout_height="142dp"
+                        android:layout_marginEnd="12dp"
+                        app:cardBackgroundColor="#C4A574"
+                        app:cardCornerRadius="25dp"
+                        app:cardElevation="4dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="16dp"
+                            android:background="@drawable/bg_gradient_brown">
+
+                            <!-- Title -->
+                            <TextView
+                                android:id="@+id/tvMonthlyRevenueTitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Monthly Revenue"
+                                android:textColor="#FFFFFF"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentStart="true" />
+
+                            <!-- Subtitle -->
+                            <TextView
+                                android:id="@+id/tvMonthlyRevenueSubtitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Total earnings for the current month"
+                                android:textColor="#FFFFFF"
+                                android:textSize="10sp"
+                                android:layout_below="@+id/tvMonthlyRevenueTitle"
+                                android:layout_alignParentStart="true"
+                                android:layout_marginTop="4dp" />
+
+                            <!-- Revenue Amount -->
+                            <TextView
+                                android:id="@+id/tvMonthlyRevenue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="₱ 0.00"
+                                android:textColor="#FFFFFF"
+                                android:textSize="25sp"
+                                android:textStyle="bold"
+                                android:layout_alignParentBottom="true"
+                                android:layout_alignParentStart="true" />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+                <!-- Estimated Profit and Stocks Row -->
+                <!-- Middle metrics group: Estimated Profit + Stocks -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_medium"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:layout_marginBottom="@dimen/margin_large"
+                    android:orientation="horizontal">
+
+                    <!-- Estimated Profit Card -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardEstimatedProfit"
+                        android:layout_width="148dp"
+                        android:layout_height="148dp"
+                        android:layout_marginEnd="8dp"
+                        app:cardBackgroundColor="#FFFFFF"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="2dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="16dp"
+                            android:background="@drawable/dashboard_card_border">
+
+                            <!-- Title -->
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Estimated Profit"
+                                android:textColor="#1A1A1A"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentStart="true" />
+
+                            <!-- Icon -->
+                            <ImageView
+                                android:layout_width="56dp"
+                                android:layout_height="56dp"
+                                android:layout_centerInParent="true"
+                                android:src="@drawable/estimated_profit"
+                                android:scaleType="fitCenter"
+                                android:contentDescription="Profit Icon" />
+
+                            <!-- Value -->
+                            <TextView
+                                android:id="@+id/tvEstimatedProfit"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="₱ 1,712.00"
+                                android:textColor="#1A1A1A"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                android:layout_alignParentBottom="true"
+                                android:layout_alignParentStart="true" />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- Stocks Card -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardStocks"
+                        android:layout_width="148dp"
+                        android:layout_height="148dp"
+                        android:layout_marginStart="8dp"
+                        app:cardBackgroundColor="#FFFFFF"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="2dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="16dp"
+                            android:background="@drawable/dashboard_card_border">
+
+                            <!-- Title with Navigation Arrow -->
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentStart="true">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Stocks"
+                                    android:textColor="#1A1A1A"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <ImageView
+                                    android:layout_width="16dp"
+                                    android:layout_height="16dp"
+                                    android:layout_marginStart="4dp"
+                                    android:src="@drawable/ic_back"
+                                    android:rotation="180"
+                                    android:tint="#666666"
+                                    android:contentDescription="Navigate to Stocks" />
+                            </LinearLayout>
+
+                            <!-- Icon -->
+                            <ImageView
+                                android:layout_width="56dp"
+                                android:layout_height="56dp"
+                                android:layout_centerInParent="true"
+                                android:src="@drawable/stock_good_condition"
+                                android:scaleType="fitCenter"
+                                android:contentDescription="Stocks Icon" />
+
+                            <!-- Status Text -->
+                            <TextView
+                                android:id="@+id/tvStocksStatus"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="All stocks are in good condition."
+                                android:textColor="#1A1A1A"
+                                android:textSize="12sp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_alignParentStart="true"
+                                android:maxLines="2"
+                                android:ellipsize="end" />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+                <!-- Divider above Recent Transactions -->
+                <View
+                    android:id="@+id/dividerRecentTransactions"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="@dimen/margin_medium"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:layout_marginBottom="@dimen/margin_small"
+                    android:background="@color/colorOutline" />
+
+                <!-- Recent Transactions group -->
+                <!-- Recent Transactions Card -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="308dp"
+                    android:layout_height="305dp"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginBottom="@dimen/margin_large"
+                    android:layout_gravity="center_horizontal"
+                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardCornerRadius="@dimen/card_corner_radius_large"
+                    app:cardElevation="@dimen/card_elevation">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:paddingTop="@dimen/padding_medium"
+                        android:paddingBottom="@dimen/padding_medium"
+                        android:paddingStart="@dimen/padding_medium"
+                        android:paddingEnd="@dimen/padding_medium"
+                        android:background="@drawable/dashboard_card_border">
+
+                        <!-- Header -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Recent Transactions"
+                                android:textColor="#1A1A1A"
+                                android:textSize="@dimen/text_size_xlarge"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tvSeeAll"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:text="See all"
+                                android:textColor="#5D4E3C"
+                                android:textSize="@dimen/text_size_medium"
+                                android:visibility="gone" />
+                        </LinearLayout>
+
+                        <!-- Transactions RecyclerView -->
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvTransactions"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_medium"
+                            android:nestedScrollingEnabled="false"
+                            android:visibility="gone" />
+
+                        <!-- Empty State -->
+                        <LinearLayout
+                            android:id="@+id/llEmptyState"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_large"
+                            android:layout_marginBottom="@dimen/margin_large"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="(。・ω・。)"
+                                android:textColor="#CCCCCC"
+                                android:textSize="48sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin_small"
+                                android:text="No transactions yet."
+                                android:textColor="#999999"
+                                android:textSize="@dimen/text_size_medium" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+        </ScrollView>
+
+        <!-- Bottom Navigation -->
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigation"
+            style="@style/BottomNavigationStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            app:menu="@menu/bottom_nav_menu" />
+
+        <!-- Floating Action Button - Hidden (Plus sign now in navigation bar) -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/margin_small"
+            android:src="@drawable/ic_add"
+            android:visibility="gone"
+            app:tint="#FFFFFF"
+            app:backgroundTint="#C4A574"
+            app:borderWidth="0dp"
+            app:elevation="12dp"
+            android:contentDescription="Add Transaction" />
+
+    </RelativeLayout>
+
+    <!-- Navigation Drawer (moved to right side for updated layout) -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigationView"
+        style="@style/NavigationViewStyle"
+        android:layout_width="@dimen/nav_drawer_width"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_drawer_header"
+        app:menu="@menu/nav_drawer_menu"
+        app:itemBackground="@drawable/nav_drawer_item_selector"
+        app:itemIconTint="@drawable/nav_drawer_text_selector"
+        app:itemTextColor="@drawable/nav_drawer_text_selector" />
+
+</androidx.drawerlayout.widget.DrawerLayout>

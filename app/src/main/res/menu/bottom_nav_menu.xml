@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Save in: res/menu/bottom_nav_menu.xml -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Home -->
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_home"
+        android:title="Home" />
+
+    <!-- History -->
+    <item
+        android:id="@+id/nav_history"
+        android:icon="@drawable/ic_history"
+        android:title="History" />
+
+    <!-- Add/Create Order -->
+    <item
+        android:id="@+id/nav_add"
+        android:icon="@drawable/ic_add"
+        android:title="Add" />
+
+    <!-- Menu -->
+    <item
+        android:id="@+id/nav_menu"
+        android:icon="@drawable/menu_page_icon"
+        android:title="Menu" />
+
+    <!-- Inventory -->
+    <item
+        android:id="@+id/nav_inventory"
+        android:icon="@drawable/inventory_icon_new"
+        android:title="Inventory" />
+
+</menu>

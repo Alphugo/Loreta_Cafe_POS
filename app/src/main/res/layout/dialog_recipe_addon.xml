@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="8dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Add-on"
+            android:textStyle="bold"
+            android:textSize="16sp" />
+
+        <ImageButton
+            android:id="@+id/btnClose"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_close"
+            android:contentDescription="Close" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/etAddOnName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Add-on name"
+        android:layout_marginBottom="12dp" />
+
+    <EditText
+        android:id="@+id/etExtraCost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Extra cost (₱)"
+        android:inputType="numberDecimal"
+        android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:textAllCaps="false" />
+
+</LinearLayout>

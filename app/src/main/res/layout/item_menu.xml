@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="6dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp"
+    android:background="@android:color/white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:minHeight="200dp">
+
+        <!-- Menu Image Container - 142x142 -->
+        <FrameLayout
+            android:id="@+id/flImageContainer"
+            android:layout_width="142dp"
+            android:layout_height="142dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="8dp"
+            android:gravity="center">
+
+            <!-- Menu Image - 65x80, zoomed out to show full image, centered -->
+            <ImageView
+                android:id="@+id/ivMenuItem"
+                android:layout_width="65dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_image_placeholder"
+                android:scaleType="fitCenter" />
+
+        </FrameLayout>
+
+        <!-- Item Name -->
+        <TextView
+            android:id="@+id/tvItemName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Item Name"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:minHeight="36dp"
+            android:gravity="top"
+            android:layout_below="@id/flImageContainer"
+            android:layout_marginTop="8dp" />
+
+        <!-- Item Price -->
+        <TextView
+            android:id="@+id/tvItemPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="₱ 0.00"
+            android:textSize="12sp"
+            android:textColor="#666666"
+            android:layout_below="@id/tvItemName"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="6dp" />
+
+        <!-- Heart Icon at Bottom Right Corner -->
+        <ImageView
+            android:id="@+id/ivHeartIcon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_heart_outline"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp"
+            android:contentDescription="Favorite"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="4dp" />
+
+        <!-- Hidden views for compatibility -->
+        <TextView
+            android:id="@+id/tvNewBadge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+        <!-- Hidden add to cart button for compatibility -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnAddToCart"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone" />
+
+        <!-- Hidden favorite button for compatibility -->
+        <ImageButton
+            android:id="@+id/btnFavorite"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

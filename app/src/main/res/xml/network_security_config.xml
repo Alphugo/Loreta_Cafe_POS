@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- Allow cleartext for all private IP ranges in development -->
+    <!-- base-config allows all HTTP traffic, which is needed for automatic backend discovery -->
+    <base-config cleartextTrafficPermitted="true" />
+</network-security-config>
+

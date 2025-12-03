@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Checked state - Brown border + Brown checkmark -->
+    <item android:state_checked="true">
+        <layer-list>
+            <!-- Brown border with transparent background -->
+            <item>
+                <shape android:shape="rectangle">
+                    <stroke android:color="#5D4E3C" android:width="2dp"/>
+                    <solid android:color="@android:color/transparent"/>
+                    <corners android:radius="4dp"/>
+                    <size android:width="24dp" android:height="24dp"/>
+                </shape>
+            </item>
+            <!-- Brown checkmark icon -->
+            <item android:drawable="@drawable/ic_check_brown" 
+                  android:width="20dp" 
+                  android:height="20dp"
+                  android:gravity="center"/>
+        </layer-list>
+    </item>
+    
+    <!-- Unchecked pressed state - Brown border only, no fill -->
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <stroke android:color="#5D4E3C" android:width="2dp"/>
+            <solid android:color="@android:color/transparent"/>
+            <corners android:radius="4dp"/>
+            <size android:width="24dp" android:height="24dp"/>
+        </shape>
+    </item>
+    
+    <!-- Unchecked state - Brown border only, transparent background -->
+    <item>
+        <shape android:shape="rectangle">
+            <stroke android:color="#5D4E3C" android:width="2dp"/>
+            <solid android:color="@android:color/transparent"/>
+            <corners android:radius="4dp"/>
+            <size android:width="24dp" android:height="24dp"/>
+        </shape>
+    </item>
+</selector>
+

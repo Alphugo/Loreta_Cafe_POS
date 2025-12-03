@@ -1,0 +1,7 @@
+yes
+
+=== TEMPORARY LOGIN CREDENTIALS ===
+Email: temp@loreta.com
+Password: temp123
+================
+For development/testing only!

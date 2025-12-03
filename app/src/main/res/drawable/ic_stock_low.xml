@@ -1,0 +1,18 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="80dp"
+    android:height="80dp"
+    android:viewportWidth="80"
+    android:viewportHeight="80">
+    <!-- Red background circle -->
+    <path
+        android:fillColor="#F44336"
+        android:pathData="M40,40m-38,0a38,38 0,1 1,76 0a38,38 0,1 1,-76 0"/>
+    <!-- Coffee cup -->
+    <path
+        android:fillColor="#603813"
+        android:pathData="M25,30h30v25c0,3.5 -3,6.5 -6.5,6.5h-17c-3.5,0 -6.5,-3 -6.5,-6.5V30z"/>
+    <path
+        android:fillColor="#E0B07D"
+        android:pathData="M28,33h24v18c0,2.5 -2,4.5 -4.5,4.5h-15c-2.5,0 -4.5,-2 -4.5,-4.5V33z"/>
+</vector>
+

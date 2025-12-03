@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="112dp"
+    android:layout_height="112dp"
+    android:layout_marginEnd="12dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp"
+    android:background="@android:color/white">
+
+    <RelativeLayout
+        android:layout_width="112dp"
+        android:layout_height="112dp"
+        android:padding="0dp">
+
+        <!-- Favorite Item Image - 47x47, centered in 112x112 container -->
+        <ImageView
+            android:id="@+id/ivFavoriteItem"
+            android:layout_width="47dp"
+            android:layout_height="47dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_image_placeholder"
+            android:scaleType="fitCenter" />
+
+        <!-- Item Name - Hidden (only image shown) -->
+        <TextView
+            android:id="@+id/tvFavoriteItemName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Item Name"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:visibility="gone" />
+
+        <!-- Item Price - Hidden (only image shown) -->
+        <TextView
+            android:id="@+id/tvFavoriteItemPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="₱ 0.00"
+            android:textSize="11sp"
+            android:textColor="#666666"
+            android:visibility="gone" />
+
+        <!-- Heart Icon at Bottom Right Corner -->
+        <ImageView
+            android:id="@+id/ivFavoriteHeart"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_heart_filled"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp"
+            android:contentDescription="Favorite" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
