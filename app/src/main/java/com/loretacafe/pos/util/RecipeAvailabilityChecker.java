@@ -124,11 +124,10 @@ public class RecipeAvailabilityChecker {
                 // Get the raw material from inventory
                 ProductEntity rawMaterial = productDao.getById(ingredient.getRawMaterialId());
                 if (rawMaterial == null) {
-                    // Treat any missing real raw material as missing ingredient
-                    missingIngredients.add(ingredient.getRawMaterialName());
-                    Log.d(TAG, "Missing ingredient: " + ingredient.getRawMaterialName() +
-                            " (ID: " + ingredient.getRawMaterialId() + ")");
-                    continue;
+                    // Log warning but don't block - ingredient might be optional or not tracked
+                    Log.w(TAG, "Raw material not found in inventory: " + ingredient.getRawMaterialName() + 
+                        " (ID: " + ingredient.getRawMaterialId() + ") - Skipping this ingredient check");
+                    continue; // Skip this ingredient instead of blocking availability
                 }
                 
                 // Check stock quantity

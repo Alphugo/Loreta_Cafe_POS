@@ -348,8 +348,10 @@ public class SalesReportActivity extends AppCompatActivity {
     }
 
     private double getSalesForDate(LocalDate date) {
-        OffsetDateTime startOfDay = date.atStartOfDay().atOffset(java.time.ZoneOffset.UTC);
-        OffsetDateTime endOfDay = date.plusDays(1).atStartOfDay().atOffset(java.time.ZoneOffset.UTC);
+        // Use local timezone instead of UTC for accurate date matching
+        java.time.ZoneId zoneId = java.time.ZoneId.systemDefault();
+        OffsetDateTime startOfDay = date.atStartOfDay().atZone(zoneId).toOffsetDateTime();
+        OffsetDateTime endOfDay = date.plusDays(1).atStartOfDay().atZone(zoneId).toOffsetDateTime();
 
         List<SaleEntity> sales = saleDao.getSalesByDateRange(startOfDay, endOfDay);
         double total = 0;
@@ -366,14 +368,16 @@ public class SalesReportActivity extends AppCompatActivity {
     }
 
     private int getTotalOrdersForDate(LocalDate date) {
-        OffsetDateTime startOfDay = date.atStartOfDay().atOffset(java.time.ZoneOffset.UTC);
-        OffsetDateTime endOfDay = date.plusDays(1).atStartOfDay().atOffset(java.time.ZoneOffset.UTC);
+        java.time.ZoneId zoneId = java.time.ZoneId.systemDefault();
+        OffsetDateTime startOfDay = date.atStartOfDay().atZone(zoneId).toOffsetDateTime();
+        OffsetDateTime endOfDay = date.plusDays(1).atStartOfDay().atZone(zoneId).toOffsetDateTime();
         return saleDao.getSalesByDateRange(startOfDay, endOfDay).size();
     }
 
     private double getCashPaymentsForDate(LocalDate date) {
-        OffsetDateTime startOfDay = date.atStartOfDay().atOffset(java.time.ZoneOffset.UTC);
-        OffsetDateTime endOfDay = date.plusDays(1).atStartOfDay().atOffset(java.time.ZoneOffset.UTC);
+        java.time.ZoneId zoneId = java.time.ZoneId.systemDefault();
+        OffsetDateTime startOfDay = date.atStartOfDay().atZone(zoneId).toOffsetDateTime();
+        OffsetDateTime endOfDay = date.plusDays(1).atStartOfDay().atZone(zoneId).toOffsetDateTime();
         List<SaleEntity> sales = saleDao.getSalesByDateRange(startOfDay, endOfDay);
         double total = 0;
         for (SaleEntity sale : sales) {
@@ -385,8 +389,9 @@ public class SalesReportActivity extends AppCompatActivity {
     }
 
     private double getCardPaymentsForDate(LocalDate date) {
-        OffsetDateTime startOfDay = date.atStartOfDay().atOffset(java.time.ZoneOffset.UTC);
-        OffsetDateTime endOfDay = date.plusDays(1).atStartOfDay().atOffset(java.time.ZoneOffset.UTC);
+        java.time.ZoneId zoneId = java.time.ZoneId.systemDefault();
+        OffsetDateTime startOfDay = date.atStartOfDay().atZone(zoneId).toOffsetDateTime();
+        OffsetDateTime endOfDay = date.plusDays(1).atStartOfDay().atZone(zoneId).toOffsetDateTime();
         List<SaleEntity> sales = saleDao.getSalesByDateRange(startOfDay, endOfDay);
         double total = 0;
         for (SaleEntity sale : sales) {

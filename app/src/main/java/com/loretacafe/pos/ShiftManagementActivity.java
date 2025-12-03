@@ -16,9 +16,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.loretacafe.pos.adapter.ShiftHistoryAdapter;
 import com.loretacafe.pos.data.local.AppDatabase;
+import com.loretacafe.pos.data.local.dao.SaleDao;
 import com.loretacafe.pos.data.local.dao.ShiftDao;
+import com.loretacafe.pos.data.local.dao.UserDao;
+import com.loretacafe.pos.data.local.entity.SaleEntity;
 import com.loretacafe.pos.data.local.entity.ShiftEntity;
+import com.loretacafe.pos.data.local.entity.UserEntity;
 import com.loretacafe.pos.data.session.SessionManager;
+import com.loretacafe.pos.security.PermissionManager;
 
 import java.time.Duration;
 import java.time.OffsetDateTime;
@@ -44,11 +49,14 @@ public class ShiftManagementActivity extends AppCompatActivity {
     private SessionManager sessionManager;
     private AppDatabase database;
     private ShiftDao shiftDao;
+    private SaleDao saleDao;
+    private UserDao userDao;
     private Handler handler;
     
     private ShiftEntity currentShift;
     private ShiftHistoryAdapter adapter;
     private List<ShiftEntity> shiftHistory = new ArrayList<>();
+    private boolean isAdminView = false;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,12 +66,23 @@ public class ShiftManagementActivity extends AppCompatActivity {
         sessionManager = new SessionManager(this);
         database = AppDatabase.getInstance(this);
         shiftDao = database.shiftDao();
+        saleDao = database.saleDao();
+        userDao = database.userDao();
         handler = new Handler(Looper.getMainLooper());
+        
+        // Check if admin - show all cashiers' shifts
+        PermissionManager permissionManager = new PermissionManager(this);
+        isAdminView = permissionManager.hasPermission(PermissionManager.Permission.VIEW_SALES_REPORTS);
         
         initializeViews();
         setupListeners();
-        loadCurrentShift();
-        loadShiftHistory();
+        
+        if (isAdminView) {
+            loadAllCashiersShifts(); // Admin view - show all cashiers
+        } else {
+            loadCurrentShift(); // Cashier view - show own shifts
+            loadShiftHistory();
+        }
     }
     
     private void initializeViews() {
@@ -80,8 +99,16 @@ public class ShiftManagementActivity extends AppCompatActivity {
         
         // Setup RecyclerView
         rvShiftHistory.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new ShiftHistoryAdapter(shiftHistory);
+        adapter = new ShiftHistoryAdapter(shiftHistory, database);
         rvShiftHistory.setAdapter(adapter);
+        
+        // Update title for admin view
+        if (isAdminView) {
+            TextView tvTitle = findViewById(R.id.tvTitle);
+            if (tvTitle != null) {
+                tvTitle.setText("All Cashiers' Shifts");
+            }
+        }
     }
     
     private void setupListeners() {
@@ -117,6 +144,64 @@ public class ShiftManagementActivity extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
             });
         }).start();
+    }
+    
+    /**
+     * Load all cashiers' completed shifts (Admin view)
+     */
+    private void loadAllCashiersShifts() {
+        new Thread(() -> {
+            // Get all completed shifts (clocked out)
+            List<ShiftEntity> allShifts = shiftDao.getAllShifts();
+            List<ShiftEntity> completedShifts = new ArrayList<>();
+            
+            for (ShiftEntity shift : allShifts) {
+                if (!shift.isActive() && shift.getClockOutTime() != null) {
+                    // Fetch user name if not set
+                    if (shift.getUserName() == null || shift.getUserName().isEmpty() || 
+                        shift.getUserName().startsWith("User #")) {
+                        UserEntity user = userDao.getUserById(shift.getUserId());
+                        if (user != null) {
+                            shift.setUserName(user.getName() != null ? user.getName() : user.getEmail());
+                        }
+                    }
+                    completedShifts.add(shift);
+                }
+            }
+            
+            // Sort by clock out time (most recent first)
+            completedShifts.sort((a, b) -> b.getClockOutTime().compareTo(a.getClockOutTime()));
+            
+            handler.post(() -> {
+                shiftHistory.clear();
+                shiftHistory.addAll(completedShifts);
+                adapter.notifyDataSetChanged();
+            });
+        }).start();
+    }
+    
+    /**
+     * Calculate total sales for a shift
+     */
+    private double calculateShiftSales(ShiftEntity shift) {
+        if (shift.getClockOutTime() == null) {
+            return 0.0; // Active shift, no sales yet
+        }
+        
+        // Get all sales by this cashier between clock in and clock out
+        List<SaleEntity> sales = saleDao.getSalesByDateRange(
+            shift.getClockInTime(),
+            shift.getClockOutTime()
+        );
+        
+        // Filter by cashier ID
+        double total = 0.0;
+        for (SaleEntity sale : sales) {
+            if (sale.getCashierId() == shift.getUserId()) {
+                total += sale.getTotalAmount() != null ? sale.getTotalAmount().doubleValue() : 0;
+            }
+        }
+        return total;
     }
     
     private void updateShiftUI() {
@@ -175,8 +260,17 @@ public class ShiftManagementActivity extends AppCompatActivity {
                 // Create new shift
                 ShiftEntity shift = new ShiftEntity();
                 shift.setUserId(userId);
-                shift.setUserName("User #" + userId); // Could fetch from UserDao
-                shift.setUserEmail("");
+                
+                // Fetch user name from database
+                UserEntity user = userDao.getUserById(userId);
+                if (user != null) {
+                    shift.setUserName(user.getName() != null ? user.getName() : user.getEmail());
+                    shift.setUserEmail(user.getEmail());
+                } else {
+                    shift.setUserName("User #" + userId);
+                    shift.setUserEmail("");
+                }
+                
                 shift.setClockInTime(OffsetDateTime.now());
                 shift.setCreatedAt(OffsetDateTime.now());
                 
@@ -212,6 +306,20 @@ public class ShiftManagementActivity extends AppCompatActivity {
                 Duration duration = Duration.between(currentShift.getClockInTime(), currentShift.getClockOutTime());
                 currentShift.setDurationMinutes((int) duration.toMinutes());
                 
+                // Calculate and save total sales for this shift
+                double shiftSales = calculateShiftSales(currentShift);
+                // Store sales in notes field for easy retrieval
+                currentShift.setNotes(String.format(Locale.getDefault(), "%.2f", shiftSales));
+                
+                // Update user name if not set
+                if (currentShift.getUserName() == null || currentShift.getUserName().isEmpty() || 
+                    currentShift.getUserName().startsWith("User #")) {
+                    UserEntity user = userDao.getUserById(currentShift.getUserId());
+                    if (user != null) {
+                        currentShift.setUserName(user.getName() != null ? user.getName() : user.getEmail());
+                    }
+                }
+                
                 shiftDao.update(currentShift);
                 
                 handler.post(() -> {
@@ -220,12 +328,17 @@ public class ShiftManagementActivity extends AppCompatActivity {
                     
                     Toast.makeText(this, 
                         String.format(Locale.getDefault(), 
-                            "✅ Clocked out! Shift duration: %d hours %d minutes", hours, minutes), 
+                            "✅ Clocked out! Shift: %dh %dm | Sales: ₱ %,.2f", 
+                            hours, minutes, shiftSales), 
                         Toast.LENGTH_LONG).show();
                     
                     currentShift = null;
                     updateShiftUI();
-                    loadShiftHistory(); // Refresh history
+                    if (isAdminView) {
+                        loadAllCashiersShifts();
+                    } else {
+                        loadShiftHistory();
+                    }
                 });
                 
             } catch (Exception e) {

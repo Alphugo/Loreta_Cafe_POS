@@ -198,12 +198,21 @@ public class CreateOrderActivity extends AppCompatActivity {
         updateTotalOrder();
         updateCartBadge();
         
-        // Don't auto-refresh - it might clear local data if backend is unavailable
-        // Products are already loaded from local database via LiveData observer
-        // Only refresh if explicitly needed
-        // if (orderViewModel != null) {
-        //     orderViewModel.refreshProducts();
-        // }
+        // CRITICAL: Force availability recalculation when returning from Inventory
+        // This ensures items update immediately after restocking
+        if (availabilityManager != null) {
+            availabilityManager.triggerRecalculation();
+        }
+        
+        // Also manually trigger availability check for all items
+        if (menuAdapter != null && !allMenuItems.isEmpty()) {
+            com.loretacafe.pos.data.local.AppDatabase database = 
+                com.loretacafe.pos.data.local.AppDatabase.getInstance(this);
+            com.loretacafe.pos.util.RecipeAvailabilityChecker checker = 
+                new com.loretacafe.pos.util.RecipeAvailabilityChecker(database);
+            checkAllItemsAvailability(allMenuItems, checker);
+            menuAdapter.notifyDataSetChanged(); // Force UI refresh
+        }
         
         // Reload favorites when returning to this activity
         FavoritesManager favoritesManager = FavoritesManager.getInstance(this);

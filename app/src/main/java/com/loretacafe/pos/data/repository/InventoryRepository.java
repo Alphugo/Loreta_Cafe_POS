@@ -163,7 +163,7 @@ public class InventoryRepository {
                                                                       String supplier,
                                                                       java.math.BigDecimal cost,
                                                                       java.math.BigDecimal price,
-                                                                      int quantity,
+                                                                      double quantity,
                                                                       String status) {
         MutableLiveData<ApiResult<ProductEntity>> liveData = new MutableLiveData<>(ApiResult.loading());
 
@@ -196,7 +196,8 @@ public class InventoryRepository {
 
             // Then, sync with backend in the background (non-blocking)
             try {
-                ProductPayloadDto payload = new ProductPayloadDto(name, category, supplier, cost, price, quantity);
+                // Cast double to int for backend DTO (backend expects int)
+                ProductPayloadDto payload = new ProductPayloadDto(name, category, supplier, cost, price, (int) quantity);
                 Response<ProductResponseDto> response = inventoryApi.updateProduct(id, payload).execute();
                 if (response.isSuccessful() && response.body() != null) {
                     ProductEntity updatedEntity = DataMappers.toEntity(response.body());

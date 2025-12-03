@@ -415,5 +415,14 @@ public class RealTimeAvailabilityManager {
             }
         }).start();
     }
+    
+    /**
+     * Public method to explicitly trigger a full availability recalculation
+     * Useful after background sync or manual refresh
+     */
+    public void triggerRecalculation() {
+        Log.d(TAG, "Manually triggering availability recalculation");
+        checkAvailabilityFromLocalDatabase();
+    }
 }
 

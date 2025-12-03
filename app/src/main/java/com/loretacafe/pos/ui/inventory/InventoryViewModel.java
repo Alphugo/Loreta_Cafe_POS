@@ -102,7 +102,7 @@ public class InventoryViewModel extends AndroidViewModel {
                                      String supplier,
                                      BigDecimal cost,
                                      BigDecimal price,
-                                     int quantity,
+                                     double quantity,
                                      String status) {
         LiveData<ApiResult<ProductEntity>> source = inventoryRepository.updateProductLocalFirst(
                 id, name, category, supplier, cost, price, quantity, status);

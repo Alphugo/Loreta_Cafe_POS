@@ -9,6 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.loretacafe.pos.R;
+import com.loretacafe.pos.data.local.AppDatabase;
+import com.loretacafe.pos.data.local.dao.SaleDao;
+import com.loretacafe.pos.data.local.entity.SaleEntity;
 import com.loretacafe.pos.data.local.entity.ShiftEntity;
 
 import java.time.format.DateTimeFormatter;
@@ -18,11 +21,12 @@ import java.util.Locale;
 public class ShiftHistoryAdapter extends RecyclerView.Adapter<ShiftHistoryAdapter.ViewHolder> {
     
     private final List<ShiftEntity> shifts;
-    private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM dd, yyyy", Locale.getDefault());
-    private final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm a", Locale.getDefault());
+    private final SaleDao saleDao;
+    private final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm", Locale.getDefault());
     
-    public ShiftHistoryAdapter(List<ShiftEntity> shifts) {
+    public ShiftHistoryAdapter(List<ShiftEntity> shifts, AppDatabase database) {
         this.shifts = shifts;
+        this.saleDao = database != null ? database.saleDao() : null;
     }
     
     @NonNull
@@ -37,23 +41,66 @@ public class ShiftHistoryAdapter extends RecyclerView.Adapter<ShiftHistoryAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ShiftEntity shift = shifts.get(position);
         
-        // Date
-        holder.tvDate.setText(shift.getClockInTime().format(dateFormatter));
+        // Cashier name
+        String cashierName = shift.getUserName() != null && !shift.getUserName().isEmpty() 
+            ? shift.getUserName() 
+            : "Cashier #" + shift.getUserId();
+        holder.tvCashierName.setText(cashierName);
         
-        // Clock in/out times
+        // Clock in/out times in format: "09:00 → 17:00"
         String clockIn = shift.getClockInTime().format(timeFormatter);
         String clockOut = shift.getClockOutTime() != null ? 
-            shift.getClockOutTime().format(timeFormatter) : "In Progress";
-        holder.tvTime.setText(clockIn + " - " + clockOut);
+            shift.getClockOutTime().format(timeFormatter) : "Active";
+        holder.tvTime.setText(clockIn + " → " + clockOut);
         
-        // Duration
-        if (shift.getDurationMinutes() != null) {
+        // Duration in format: "8h"
+        if (shift.getDurationMinutes() != null && shift.getClockOutTime() != null) {
             int hours = shift.getDurationMinutes() / 60;
-            int minutes = shift.getDurationMinutes() % 60;
-            holder.tvDuration.setText(String.format(Locale.getDefault(), "%d hrs %d min", hours, minutes));
+            holder.tvDuration.setText(String.format(Locale.getDefault(), "%dh", hours));
         } else {
             holder.tvDuration.setText("Active");
         }
+        
+        // Calculate and display sales for this shift
+        calculateAndDisplaySales(holder, shift);
+    }
+    
+    private void calculateAndDisplaySales(@NonNull ViewHolder holder, ShiftEntity shift) {
+        if (saleDao == null || shift.getClockOutTime() == null) {
+            holder.tvSales.setText("₱ 0.00 sales");
+            return;
+        }
+        
+        // Calculate sales in background thread
+        new Thread(() -> {
+            try {
+                // Get all sales by this cashier between clock in and clock out
+                List<SaleEntity> sales = saleDao.getSalesByDateRange(
+                    shift.getClockInTime(),
+                    shift.getClockOutTime()
+                );
+                
+                // Filter by cashier ID
+                double total = 0.0;
+                for (SaleEntity sale : sales) {
+                    if (sale.getCashierId() == shift.getUserId()) {
+                        total += sale.getTotalAmount() != null ? sale.getTotalAmount().doubleValue() : 0;
+                    }
+                }
+                
+                // Store in final variable for lambda
+                final double finalTotal = total;
+                
+                // Update UI on main thread
+                holder.itemView.post(() -> {
+                    holder.tvSales.setText(String.format(Locale.getDefault(), "₱ %,.2f sales", finalTotal));
+                });
+            } catch (Exception e) {
+                holder.itemView.post(() -> {
+                    holder.tvSales.setText("₱ 0.00 sales");
+                });
+            }
+        }).start();
     }
     
     @Override
@@ -62,15 +109,17 @@ public class ShiftHistoryAdapter extends RecyclerView.Adapter<ShiftHistoryAdapte
     }
     
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvDate;
+        TextView tvCashierName;
         TextView tvTime;
         TextView tvDuration;
+        TextView tvSales;
         
         ViewHolder(View itemView) {
             super(itemView);
-            tvDate = itemView.findViewById(R.id.tvShiftDate);
+            tvCashierName = itemView.findViewById(R.id.tvShiftCashierName);
             tvTime = itemView.findViewById(R.id.tvShiftTime);
             tvDuration = itemView.findViewById(R.id.tvShiftDuration);
+            tvSales = itemView.findViewById(R.id.tvShiftSales);
         }
     }
 }

@@ -190,12 +190,13 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
                 item.setHasLowStock(hasLowStock);
             }
             
-            // Disable item if unavailable (recipe-based or quantity-based)
-            itemView.setEnabled(isAvailable);
-            itemView.setAlpha(isAvailable ? 1.0f : 0.5f);
+            // Always allow ordering - items are always enabled and clickable
+            // Ingredients will still be deducted when orders are placed
+            itemView.setEnabled(true);
+            itemView.setAlpha(1.0f);
             
-            // Show/hide stock badges
-            updateStockBadges(item, !isAvailable, hasLowStock, item.getAvailableQuantity());
+            // Hide "Out of Stock" badge - only show "Low Stock" warning if needed
+            updateStockBadges(item, false, hasLowStock, item.getAvailableQuantity());
 
             // Load actual image
             String imageName = item.getImageResourceName();
@@ -238,33 +239,17 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
 
             // Item card click - either navigate to Edit Item screen OR add to cart
             // Priority: itemClickListener (for MenuActivity) > addToCartClickListener (for CreateOrderActivity)
+            // ALLOW ALL CLICKS - items can be ordered even when "Out of Stock"
+            // Ingredients will still be deducted when orders are placed
             itemView.setOnClickListener(v -> {
                 int position = getBindingAdapterPosition();
                 if (position != RecyclerView.NO_POSITION) {
-                    // Don't allow clicks on unavailable items (recipe-based or quantity-based)
-                    if (!item.isAvailable()) {
-                        // Show tooltip with missing ingredients if available
-                        if (item.getMissingIngredientsText() != null && !item.getMissingIngredientsText().isEmpty()) {
-                            android.widget.Toast.makeText(
-                                itemView.getContext(),
-                                "Unavailable: Missing " + item.getMissingIngredientsText(),
-                                android.widget.Toast.LENGTH_SHORT
-                            ).show();
-                        } else {
-                            android.widget.Toast.makeText(
-                                itemView.getContext(),
-                                "Item is currently unavailable",
-                                android.widget.Toast.LENGTH_SHORT
-                            ).show();
-                        }
-                        return;
-                    }
-                    
                     if (itemClickListener != null) {
                         // MenuActivity: navigate to Edit Item screen
                         itemClickListener.onItemClick(item, position);
                     } else if (addToCartClickListener != null) {
                         // CreateOrderActivity: add to cart instantly
+                        // Works even if item is marked as "Out of Stock"
                         addToCartClickListener.onAddToCartClick(item, position);
                     }
                 }

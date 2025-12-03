@@ -601,7 +601,7 @@ public class InventoryActivity extends AppCompatActivity {
             // Calculate status based on quantity
             String status = calculateStatusFromQuantity(quantity);
 
-            // Auto-save using the new method
+            // Auto-save using the new method (cast to double for fractional quantities)
             viewModel.updateProductAutoSave(
                     product.getId(),
                     name,
@@ -609,7 +609,7 @@ public class InventoryActivity extends AppCompatActivity {
                     supplier,
                     cost,
                     price,
-                    quantity,
+                    (double) quantity,
                     status
             );
         };
@@ -785,6 +785,14 @@ public class InventoryActivity extends AppCompatActivity {
             return Integer.parseInt(text);
         } catch (NumberFormatException e) {
             return 0;
+        }
+    }
+    
+    private double parseDoubleOrZero(String text) {
+        try {
+            return text == null || text.isEmpty() ? 0.0 : Double.parseDouble(text);
+        } catch (NumberFormatException e) {
+            return 0.0;
         }
     }
 
